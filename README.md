@@ -7,7 +7,7 @@ Usage Example
 -------
 
 ```js
-import { Map, bootstrapGoogleMapsAPI } from 'react-googlemaps';
+import { Map, bootstrapGoogleMapsAPI } from 'react-googlemaps-dynamic';
 const APIKey = 'API_Key_Here';
 
 var DynamicReactGoogleMap = React.createClass({
