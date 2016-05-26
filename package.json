@@ -1,7 +1,7 @@
 {
-  "name": "react-googlemaps",
+  "name": "react-googlemaps-dynamic",
   "version": "0.4.0",
-  "description": "A declarative React interface to Google Maps",
+  "description": "Experimental fork of react-googlemaps that can dynamically load the Google Maps API",
   "keywords": [
     "react",
     "react-component",
@@ -17,30 +17,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pieterv/react-googlemaps.git"
+    "url": "https://github.com/josh-/react-googlemaps-dynamic.git"
   },
-  "homepage": "https://github.com/pieterv/react-googlemaps",
-  "bugs": "https://github.com/pieterv/react-googlemaps/issues",
-  "author": "Pieter Vanderwerff",
+  "homepage": "https://github.com/josh-/react-googlemaps-dynamic",
+  "bugs": "https://github.com/josh-/react-googlemaps-dynamic/issues",
+  "author": "Josh Parnham",
   "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
   "devDependencies": {
-    "jest-cli": "^0.1.18",
+    "jest-cli": "^0.4.0",
     "jsx-loader": "^0.12.2",
     "react-tools": "^0.12.2",
-    "webpack": "^1.3.7",
-    "react": ">=0.12.1"
+    "webpack": "^1.3.7"
   },
-  "peerDependencies": {
-    "react": ">=0.12.1",
-    "reactify": ">=0.17.1"
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
     ]
-  },
-  "browserify": {
-    "transform": ["reactify"]
   }
 }
