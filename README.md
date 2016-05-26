@@ -1,67 +1,44 @@
-React Google Maps [![Build Status](https://travis-ci.org/pieterv/react-googlemaps.svg?branch=master)](https://travis-ci.org/pieterv/react-googlemaps)
+React Google Maps Dynamic
 ============
 
-A declarative React interface to Google Maps.
+Experimental fork of [react-googlemaps](https://github.com/pieterv/react-googlemaps) that can dynamically load the Google Maps API
 
-Check it out:
-
-* [Example usage](examples)
-* [API docs](docs/api.md)
-* [What's new](CHANGELOG.md)
-
-Important Notes
----------------
-
-This is an alpha release. The API and organizational structure are subject to
-change. Comments and contributions are much appreciated.
-
-Installation
-------------
-
-```sh
-npm install react-googlemaps --save
-```
-
-This library is written with CommonJS modules. If you are using
-browserify, webpack, or similar, you can consume it like anything else
-installed from npm.
-
-Usage
------
+Usage Example
+-------
 
 ```js
-var React = require('react');
-var ReactGoogleMaps = require('react-googlemaps');
-var GoogleMapsAPI = window.google.maps;
+import { Map, bootstrapGoogleMapsAPI } from 'react-googlemaps';
+const APIKey = 'API_Key_Here';
 
-var Map = ReactGoogleMaps.Map;
-var Marker = ReactGoogleMaps.Marker;
-var OverlayView = ReactGoogleMaps.OverlayView;
+var DynamicReactGoogleMap = React.createClass({
+  getInitialState() {
+      return {
+          scriptStatus: 'unloaded'
+      };
+  },
 
-function handleClick(e) {
-  console.log('Clicked at position', e.latLng);
-}
+  componentDidMount() {
+      bootstrapGoogleMapsAPI(
+          APIKey,
+          () => {
+              this.setState({ center: new window.google.maps.LatLng(37.8141, 144.9633); });
+              this.setState({ scriptStatus: 'loaded' });
+          },
+          () => {
+              this.setState({ scriptStatus: 'error' });
+          }
+      );
+  },
 
-React.render(
-  <Map
-    initialZoom={10}
-    initialCenter={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
+  render() {
+    return {this.state.scriptStatus === 'loaded' ? <Map {...this.props}></Map> : null};
+  }
+});
 
-    <Marker
-      onClick={handleClick}
-      position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)} />
-
-    <OverlayView
-      style={{backgroundColor: '#fff'}}
-      position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
-      <p>Some content</p>
-    </OverlayView>
-  </Map>,
-  mountNode
-);
+module.exports = DynamicReactGoogleMap;
 ```
 
-Checkout the [API docs](docs/api.md) or the [`examples`](examples) directory for more detailed usage.
+Please see [react-googlemaps](https://github.com/pieterv/react-googlemaps) for more usage instructions.
 
 License
 -------

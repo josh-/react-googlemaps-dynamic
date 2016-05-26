@@ -5,7 +5,6 @@ var invariant = require('react/lib/invariant');
 var MapOption = require('./MapOption');
 var MapOptionConfig = require('./MapOptionConfig');
 var MapEvent = require('./MapEvent');
-var GoogleMapsAPI = require('../GoogleMapsAPI');
 
 /**
  * Cached reset map option object
@@ -153,7 +152,7 @@ var ReactMapComponentMixin = {
   putListener: function(eventName) {
     invariant(!this.__eventCache[eventName], 'Already has `%s` event bound', eventName);
 
-    this.__eventCache[eventName] = GoogleMapsAPI.event.addListener(
+    this.__eventCache[eventName] = window.google.maps.event.addListener(
       this.__node,
       MapEvent.getEventName[eventName],
       MapEvent.createEventDispatcher(eventName, this)
@@ -163,7 +162,7 @@ var ReactMapComponentMixin = {
   deleteListener: function(eventName) {
     invariant(this.__eventCache[eventName], 'No event of `%s` bound to remove', eventName);
 
-    GoogleMapsAPI.event.removeListener(this.__eventCache[eventName]);
+    window.google.maps.event.removeListener(this.__eventCache[eventName]);
     delete this.__eventCache[eventName];
   },
 

@@ -2,7 +2,6 @@
 
 var assign = require('react/lib/Object.assign');
 var mapObject = require('react/lib/mapObject');
-var GoogleMapsAPI = require('./GoogleMapsAPI');
 var ReactMapComponent = require('./ui/ReactMapComponent');
 
 function createMapComponentClass(constructorFn, constructorName) {
@@ -10,7 +9,7 @@ function createMapComponentClass(constructorFn, constructorName) {
 }
 
 function constructGoogleMapsMapClass() {
-  return new GoogleMapsAPI.Map(this.props.mapDiv);
+  return new window.google.maps.Map(this.props.mapDiv);
 }
 
 /**

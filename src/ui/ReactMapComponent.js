@@ -20,12 +20,11 @@ function nullRenderer() {
  * @param {string} constructorName
  * @returns {Function}
  */
+
 function createGoogleMapClassConstructor(constructorName) {
-  var Constructor = GoogleMapsAPI[constructorName];
-
-  invariant(Constructor, 'Google Maps class of `%s` does not exist', constructorName);
-
   return function() {
+    var Constructor = window.google.maps[constructorName];
+    invariant(Constructor, 'Google Maps class of `%s` does not exist', constructorName);
     return new Constructor();
   }
 }

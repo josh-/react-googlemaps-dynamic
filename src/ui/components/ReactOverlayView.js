@@ -11,7 +11,9 @@ function MapOverlayView(props) {
   this.setMap(props.map);
 }
 
-MapOverlayView.prototype = new GoogleMapsAPI.OverlayView();
+MapOverlayView.prototype = function() {
+  return new window.google.maps.OverlayView();
+}
 
 MapOverlayView.prototype.onAdd = function() {
   this._containerElement = document.createElement('div');
